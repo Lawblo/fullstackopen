@@ -1,0 +1,59 @@
+# 1b. JavaScript
+
+Because browser do not yet support all newer JavaScript features. Due to this,
+a lot of code that browsers are intended to run is transpiled. Transpiled code 
+means that its translated to code that is compatible with older versions of 
+javascript. The most popular transpiler today is *Babel*
+
+## Variables
+
+There are several ways of defining a vaiable in javascript. let, const, and var.
+
+Creating a variable using ```const``` makes the variable a constant. ```let``` on
+the other hand creates a normal changeable variable. For a long time ```var```
+was the only way to define a variable. The use of var is generally ill adviced.
+
+## Arrays
+
+### forEach
+
+On way of iterating through an array is using forEach. forEach can be called on
+an array and will perform the passed function for every item of the array.
+forEach can receive other arguments, such as *index*, which shows the index of
+the current element, *array* which shows the array forEach was called on, and the
+valua that is to be used as ```this``` when executing the function.
+
+### Immutable data and concat
+
+React often uses functional programing techniques, in which the use of immutable
+data structures is common. Because of this, it is generally advised to use the 
+array method concat in stead of push. Where push changes the given array, concat returns
+a new one, leaving the original unchanged.  
+
+### Map
+Another useful method for arrays is *map*. Map iterates through the array and performs
+an action on each item, and returns a new array containing the modified values.
+
+### Destructuring assignment
+
+Indiviual items of an array can easily be assigned to variables using the destructuring
+assignment. 
+
+```javascript
+const t = [1, 2, 3, 4, 5]
+
+const [first, second, ...rest] = t
+
+console.log(first, second)  // 1, 2 is printed
+console.log(rest)          // [3, 4, 5] is printed
+```
+
+## Objects
+
+```javascript
+const object = {
+    a: 1,
+    b: 2,
+    c:3
+    }
+```
