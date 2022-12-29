@@ -10,7 +10,7 @@
 ### Part 1
 - [1a. Introduction to React](./notes/1_introduction_to_react.md)
 - [1b. JavaScript](./notes/1b_javascript.md)
-
+- [1c. Component State, Event Handlers](./notes/1c_component_state_event_handlers.md)
 
 
 ## Excercises

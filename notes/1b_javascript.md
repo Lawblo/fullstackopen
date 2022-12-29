@@ -1,5 +1,7 @@
 # 1b. JavaScript
 
+[[Home]](../README.md)
+
 Because browser do not yet support all newer JavaScript features. Due to this,
 a lot of code that browsers are intended to run is transpiled. Transpiled code 
 means that its translated to code that is compatible with older versions of 
@@ -34,6 +36,8 @@ a new one, leaving the original unchanged.
 Another useful method for arrays is *map*. Map iterates through the array and performs
 an action on each item, and returns a new array containing the modified values.
 
+
+
 ### Destructuring assignment
 
 Indiviual items of an array can easily be assigned to variables using the destructuring
@@ -57,3 +61,35 @@ const object = {
     c:3
     }
 ```
+
+Can be accesed with bracket or dot notation. If the property includes spaces, 
+the bracket notation has to be used. 
+
+### Object methods and 'this'
+
+When using newer versions of react, that includes hooks, theres no need for 
+defining objects with methods. 
+
+Methods can be assigned to an object by defining properties that are functions, 
+and can be assigned even after the creation of the object. 
+
+When calling a method through a reference, the method loses the knowledge of what
+the original ```this``` was.
+
+```javascript
+arto.greet()       // "hello, my name is Arto Hellas" gets printed
+
+const referenceToGreet = arto.greet
+referenceToGreet() // prints "hello, my name is undefined"
+```
+
+There are several ways of preserving the original ```this```. One of these is 
+using a method call ```bind```
+
+*Arrow functions* should not be used as methods for objects, because they break the
+```this``` functionality
+
+# Classes
+
+There is not a class feature in JavaScript, like in other object oriented languages.
+There are however a features 'simulating' classes. 

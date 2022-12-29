@@ -1,5 +1,7 @@
 # 1 - Introduction to React
 
+[[Home]](../README.md)
+
 Initializing react app:
 
 ```bash
