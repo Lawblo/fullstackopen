@@ -1,15 +1,22 @@
 import { useState } from 'react'
+import Display from './Display'
+import Button from './Button'
 
-const App = props => {
+const App = (props) => {
     const [counter, setCounter] = useState(0)
-    console.log(setCounter)
 
-    setTimeout(
-        () => setCounter(counter + 1),
-        1000
+    const increaseByOne = () => setCounter(counter + 1)
+    const decreaseByOne = () => setCounter(counter - 1)
+    const setToZero = () => setCounter(0)
+
+    return (
+        <div>
+            <Display counter={counter} />
+            <Button onClick={increaseByOne} text={'plus'}/>
+            <Button onClick={decreaseByOne} text={'minus'}/>
+            <Button onClick={setToZero} text={'reset'}/>
+        </div>
     )
-    return <div>{counter}</div>
 }
-
 
 export default App

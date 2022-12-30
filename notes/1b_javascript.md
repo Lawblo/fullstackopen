@@ -36,8 +36,6 @@ a new one, leaving the original unchanged.
 Another useful method for arrays is *map*. Map iterates through the array and performs
 an action on each item, and returns a new array containing the modified values.
 
-
-
 ### Destructuring assignment
 
 Indiviual items of an array can easily be assigned to variables using the destructuring
@@ -50,6 +48,22 @@ const [first, second, ...rest] = t
 
 console.log(first, second)  // 1, 2 is printed
 console.log(rest)          // [3, 4, 5] is printed
+```
+
+Destructuring also works with objects
+
+```javascript
+const object1 = {
+    var1: 1,
+    var2: 2,
+    var3: 3
+    }
+
+```
+
+Assignment by destructuring the object: 
+```javascript
+const {var1, var2, var3} = object1
 ```
 
 ## Objects
