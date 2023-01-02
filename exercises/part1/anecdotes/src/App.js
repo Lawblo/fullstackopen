@@ -14,6 +14,8 @@ const DisplayScore = ({score}) => {
     )
 }
 
+
+
 const App = () => {
     const anecdotes = [
         'If it hurts, do it more often.',
@@ -38,12 +40,35 @@ const App = () => {
         copy[selected] += 1
         setScores(copy)
     }
+
+    const getMostPopular = () => {
+        let mostPopular = null
+        let highestScore = 0
+        for (let i = 0; i < anecdotes.length; i++) {
+            if (scores[i] > highestScore) {
+                mostPopular = anecdotes[i]
+                highestScore = scores[i]
+            }  
+        }
+        if (!highestScore) {
+            mostPopular = 'No anecdote'
+            highestScore = 'has any'
+        }
+        return { mostPopular, highestScore }
+    }
+
+    const { mostPopular, highestScore } = getMostPopular()
+
     return (
         <div>
-        <DisplayAnecdote anecdote={anecdotes[selected]} />
-        <DisplayScore score={scores[selected]} />
-        <Button handleClicks={() => castVote()} text='vote'/>
-        <Button handleClicks={() => changeAnecdote()} text='next anecdote'/>
+            <h1>Anecdote of the day</h1>
+            <DisplayAnecdote anecdote={anecdotes[selected]} />
+            <DisplayScore score={scores[selected]} />
+            <Button handleClicks={() => castVote()} text='vote'/>
+            <Button handleClicks={() => changeAnecdote()} text='next anecdote'/>
+            <h1>Anecdote with most votes</h1>
+            <DisplayAnecdote anecdote={mostPopular}/>
+            <DisplayScore score={highestScore}/>
         </div>
     )
 }
