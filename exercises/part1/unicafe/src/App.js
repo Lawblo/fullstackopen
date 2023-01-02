@@ -31,19 +31,16 @@ const Statistics = ({good, neutral, bad}) => {
     }
 }
 
-const Button = ({handleClick, text}) => {
-    return (
-        <button onClick={handleClick}> {text} </button>
-    )
-}
-const StatisticsLine = ({text, value, symbol}) => {
-    return (
-        <tr>
-            <td>{text}:</td>
-            <td>{value}{symbol}</td>
-        </tr>
-    )
-}
+const Button = ({handleClick, text}) => (
+    <button onClick={handleClick}> {text} </button>
+)
+
+const StatisticsLine = ({text, value, symbol}) => (
+    <tr>
+        <td>{text}:</td>
+        <td>{value}{symbol}</td>
+    </tr>
+)
 
 const App = () => {
 
