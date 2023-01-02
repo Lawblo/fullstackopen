@@ -11,6 +11,7 @@
 - [1a. Introduction to React](./notes/1_introduction_to_react.md)
 - [1b. JavaScript](./notes/1b_javascript.md)
 - [1c. Component State, Event Handlers](./notes/1c_component_state_event_handlers.md)
+- [1d. A more complex state, debugging React apps](./notes/1d_more_complex_state_and_debugging.md)
 
 
 ## Excercises

@@ -1,5 +1,7 @@
 # Fundamentals of Web Apps
 
+[[Home]](../README.md)
+
 ## HTTP GET
 
 The server and web browser communicates using the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP).
