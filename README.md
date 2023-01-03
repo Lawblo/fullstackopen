@@ -22,6 +22,6 @@
 - [0.4 - New Note Diagram](./exercises/04.md)
 - [0.5 - Single Page App Diagram](./exercises/05.md)
 - [0.6 - New note in Single Page App Diagram](./exercises/06.md)
-- [1.1 - 1.5 - CourseInfo](./exercises/courseinfo/src/App.js)
+- [1.1-1.5, 2.1-2.5 - CourseInfo](./exercises/courseinfo/src/App.js)
 - [1.6 - 1.11 - Unicafe](./exercises/unicafe/src/App.js)
 - [1.12 - 1.14 - Anecdotes](./exercises/anecdotes/src/App.js)
