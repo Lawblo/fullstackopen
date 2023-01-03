@@ -1,3 +1,15 @@
+const DisplayCourses = ({courses}) => {
+    return courses.map((course) => {
+        return (
+            <div key={course.id}>
+                <h1>{course.name}</h1>
+                <DisplayParts parts={course.parts}/>
+                <TotalExercises parts={course.parts}/>
+            </div>
+        )
+    })
+}
+
 const DisplayParts = ({parts}) => (
     parts.map(part => <Part key={part.id} part={part} />)
 )
@@ -14,12 +26,11 @@ const TotalExercises = ({ parts }) => {
     )
 }
 
-const Course = ({course}) => {
+
+const Course = ({courses}) => {
     return (
         <div>
-            <h1>{course.name}</h1>
-            <DisplayParts parts={course.parts}/>
-            <TotalExercises parts={course.parts}/>
+            <DisplayCourses courses={courses}/>
         </div>
     )
 }
