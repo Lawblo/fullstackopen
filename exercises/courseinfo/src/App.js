@@ -1,56 +1,35 @@
+import Course from './components/Course'
+
 const App = () => {
     const course = {
+        id: 1,
         name: 'Half Stack application development',
         parts: [
             {
                 name: 'Fundamentals of React',
-                exercises: 10
+                exercises: 10,
+                id: 1
             },
             {
                 name: 'Using props to pass data',
-                exercises: 7
+                exercises: 7,
+                id: 2
             }, 
             {
                 name: 'State of components',
-                exercises: 14
+                exercises: 14,
+                id: 3
+            },
+            {
+                name: 'Redux',
+                exercises: 12,
+                id: 4
             }
         ]
     }
 
-    return (
-        <>
-            <Header name={course.name}/>
-            <Content parts={course.parts}/>
-            <Total parts={course.parts}/>
-
-        </>
-    )
+    return <Course course={course} />
 }
 
-const Header = (props) => {
-    return (
-        <div>
-            <h1>{props.name}</h1>
-        </div>
-    )
-}
-
-const Content = (props) => {
-    return (
-        <div>
-            <p>{props.parts[0].name} {props.parts[0].exercises}</p>
-            <p>{props.parts[1].name} {props.parts[1].exercises}</p>
-            <p>{props.parts[2].name} {props.parts[2].exercises}</p>
-        </div>
-    )
-}
-
-const Total = (props) => {
-    return (
-        <div>
-            <p>Number of exercises: {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
-        </div>
-    )
-}
 export default App
 
