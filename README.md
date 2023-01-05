@@ -16,6 +16,7 @@
 ### Part 2
 
 - [2a. Rendering a collection, modules](./notes/2a_rendering_a_collection_and_modules.md)
+- [2b. Forms](./notes/2b_forms.md)
 
 ### Excercises
 
