@@ -1,12 +1,15 @@
 import { useState} from 'react'
 
-const Person = ({person}) => <li> {person.name} </li>
+const Person = ({person}) => <li> {person.name} {person.number} </li>
 
 
 const App = () => {
 
   const [persons, setPersons] = useState([
-    {name: 'Arto Hellas'}
+    {
+      name: 'Arto Hellas',
+      number: '040-1234567',
+    }
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -20,14 +23,20 @@ const App = () => {
     else {
       const personObject = {
         name: newName,
+        number: newNumber
       }
       setPersons(persons.concat(personObject))
     }
     setNewName('')
+    setNewNumber('')
   }
 
-  const handleInputChange = (event) => {
+  const handleNameChange = (event) => {
     setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   const isDuplicate = () => {
@@ -45,13 +54,17 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
         <div>
+          name:
           <input
-            onChange={handleInputChange}
+            onChange={handleNameChange}
             value={newName}
           />
         </div>
         <div>
+          number:
           <input
+            onChange={handleNumberChange}
+            value={newNumber}
           />
         </div>
         <div>
