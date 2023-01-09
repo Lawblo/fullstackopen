@@ -1,7 +1,31 @@
 import { useState} from 'react'
 
-const Person = ({person}) => <li> {person.name} {person.number} </li>
+const Person = ({person}) => <p> {person.name} {person.number} </p>
 
+const PersonForm = ({persons, nameFilter}) => {
+  return (
+    <>
+    {persons
+      .filter(person => 
+        person.name
+        .toLowerCase()
+        .includes(nameFilter.toLowerCase()))
+      .map(person => <Person key={person.id} person={person} />)}
+    </>
+  )
+}
+
+const FormInput = ({title, handleChange, newValue}) => {
+  return (
+    <div>
+      {title + ': '} 
+      <input
+        onChange={handleChange}
+        value={newValue}
+      />
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -47,7 +71,6 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    console.log(nameFilter)
     setNewFilter(event.target.value)
   }
 
@@ -65,37 +88,31 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      filter shown with
-      <input onChange={handleFilterChange}/> 
+      <form>
+        <FormInput
+          title={'filter shown with'}
+          handleChange={handleFilterChange}
+          newValue={nameFilter}
+        />
+      </form>
       <h3>Add a new person</h3>
       <form onSubmit={addPerson}>
-        <div>
-          name:
-          <input
-            onChange={handleNameChange}
-            value={newName}
+         <FormInput 
+            title={'name'}
+            handleChange={handleNameChange}
+            newValue={newName}
           />
-        </div>
-        <div>
-          number:
-          <input
-            onChange={handleNumberChange}
-            value={newNumber}
+          <FormInput
+            title={'number'}
+            handleChange={handleNumberChange}
+            newValue={newNumber}
           />
-        </div>
         <div>
           <button type='submit'>add</button>
         </div>
       </form>
       <h3>Numbers</h3>
-      <ul>
-        {persons
-          .filter(person => 
-            person.name
-            .toLowerCase()
-            .includes(nameFilter.toLowerCase()))
-          .map(person => <Person key={person.id} person={person} />)}
-      </ul>
+      <PersonForm persons={persons} nameFilter={nameFilter} />
     </div>
   );
 }
