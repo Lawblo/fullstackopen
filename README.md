@@ -17,12 +17,14 @@
 
 - [2a. Rendering a collection, modules](./notes/2a_rendering_a_collection_and_modules.md)
 - [2b. Forms](./notes/2b_forms.md)
+- [2c. Getting data from server](./notes/2c_getting_data_from_server.md)
 
 ### Excercises
 
-- [0.4 - New Note Diagram](./exercises/04.md)
-- [0.5 - Single Page App Diagram](./exercises/05.md)
-- [0.6 - New note in Single Page App Diagram](./exercises/06.md)
-- [1.1-1.5, 2.1-2.5 - CourseInfo](./exercises/courseinfo/src/App.js)
-- [1.6 - 1.11 - Unicafe](./exercises/unicafe/src/App.js)
-- [1.12 - 1.14 - Anecdotes](./exercises/anecdotes/src/App.js)
+- [0.4, New Note Diagram](./exercises/04.md)
+- [0.5, Single Page App Diagram](./exercises/05.md)
+- [0.6, New note in Single Page App Diagram](./exercises/06.md)
+- [1.1 - 1.5, 2.1 - 2.5, CourseInfo](./exercises/courseinfo/src/App.js)
+- [1.6 - 1.11, Unicafe](./exercises/unicafe/src/App.js)
+- [1.12 - 1.14, Anecdotes](./exercises/anecdotes/src/App.js)
+- [2.6 - 2.10, Phonebook](./exercises/phonebook/src/App.js)
