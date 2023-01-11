@@ -2,9 +2,6 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 
 const DisplayCountries = ({countries, filter}) => {
-  if (!countries.length) return <></>
-  
-
   const filteredCountries = countries.filter(country => {
     const countryName = country.name.common
     return (countryName
@@ -72,19 +69,55 @@ const DisplayCountry = ({country, showComponent }) => {
         })}
       </ul>
       <img src={country.flags.png}/>
+      <DisplayWeather country={country}/>
     </div>
+  )
+}
+
+const DisplayWeather = ({country}) => {
+  const [isLoading, setLoading] = useState(true)
+  const [weather, setWeather] = useState({})
+  const apikey = process.env.REACT_APP_API_KEY
+
+  useEffect(() => {
+    axios
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital},${country.ccn3}&appid=${apikey}&units=metric`)
+      .then(response => {
+        setWeather(response.data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div>Weather data loading</div>
+    )
+  }
+
+  const weatherCode = weather.weather[0].icon
+  const weatherIcon = `http://openweathermap.org/img/wn/${weatherCode}@2x.png`
+
+  return (
+    <>
+      <h2>Weather in {country.capital}</h2>
+      <p>temperature: {weather.main.temp}°C</p>
+      <img src={weatherIcon}/>
+      <p>wind: {weather.wind.speed} m/s</p>
+    </>
   )
 }
 
 const App = () => {
   const [countries, setCountries] = useState({})
   const [filter, setNewFilter] = useState('')
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     axios
       .get('https://restcountries.com/v3.1/all')
       .then(response => {
         setCountries(response.data)
+        setLoading(false)
       })
   }, [])
 
@@ -92,6 +125,9 @@ const App = () => {
     setNewFilter(event.target.value.toLowerCase())
   }
 
+  if (isLoading) {
+    return <div>countrydata is loading</div>
+  }
   return (
     <div>
       <form onChange={handleFilterChange}>
