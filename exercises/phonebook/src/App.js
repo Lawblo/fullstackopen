@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import noteService from './services/persons.js'
 
 
 const Person = ({person}) => <p> {person.name} {person.number} </p>
@@ -36,18 +36,16 @@ const App = () => {
   const [nameFilter, setNewFilter] = useState('')
 
   useEffect(() => {
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      setPersons(response.data)
-    })
+
+    noteService
+      .getAll()
+      .then(initialNotes => setPersons(initialNotes))
   }, [])
 
   const addPerson = (event) => {
     event.preventDefault()
     if (isDuplicate()) {
       alert(`${newName} is already added to the phonebook`)
-      setPersons([...persons])
       setNewName('')
       setNewNumber('')
       return 
@@ -58,31 +56,25 @@ const App = () => {
       number: newNumber,
     }
 
-    axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    noteService
+      .create(personObject)
+      .then( newObject => {
+        setPersons(persons.concat(newObject))
         setNewName('')
         setNewNumber('')
-      })
+      }
+    )
   }
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
-
-  const handleFilterChange = (event) => {
-    setNewFilter(event.target.value)
+  const handleChange = (event, stateSetter) => {
+    stateSetter(event.target.value)
   }
 
   const isDuplicate = () => {
-    if (persons .filter(
-      person => person.name === newName
-    ).length > 0) return true
+    if (persons
+      .filter( person => person.name === newName)
+      .length > 0)
+      return true
     return false
   }
 
@@ -93,7 +85,7 @@ const App = () => {
       <form>
         <FormInput
           title={'filter shown with'}
-          handleChange={handleFilterChange}
+          handleChange={event => handleChange(event, setNewFilter)}
           newValue={nameFilter}
         />
       </form>
@@ -101,12 +93,12 @@ const App = () => {
       <form onSubmit={addPerson}>
          <FormInput 
             title={'name'}
-            handleChange={handleNameChange}
+            handleChange={event => handleChange(event, setNewName)}
             newValue={newName}
           />
           <FormInput
             title={'number'}
-            handleChange={handleNumberChange}
+            handleChange={event => handleChange(event, setNewNumber)}
             newValue={newNumber}
           />
         <div>
