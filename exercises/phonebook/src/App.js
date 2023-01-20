@@ -2,17 +2,35 @@ import { useState, useEffect } from 'react'
 import noteService from './services/persons.js'
 
 
-const Person = ({person}) => <p> {person.name} {person.number} </p>
+const Person = ({person, persons, setPersons}) => {
+  const deletePerson = () => {
+    noteService.deletePerson(person.id)
+    setPersons(persons.filter(p => p.id !== person.id))
+  } 
 
-const PersonForm = ({persons, nameFilter}) => {
+  return (
+    <p> {person.name} {person.number} <button onClick={deletePerson}>delete</button></p>
+  )
+}
+
+const PersonForm = ({persons, setPersons, nameFilter}) => {
   return (
     <>
     {persons
-      .filter(person => 
-        person.name
+      .filter(person => person.name
         .toLowerCase()
         .includes(nameFilter.toLowerCase()))
-      .map(person => <Person key={person.id} person={person} />)}
+        .map(person => {
+            return (
+              <Person
+                key={person.id}
+                person={person}
+                setPersons={setPersons}
+                persons = {persons}
+              /> 
+            )
+        })
+    }
     </>
   )
 }
@@ -36,7 +54,6 @@ const App = () => {
   const [nameFilter, setNewFilter] = useState('')
 
   useEffect(() => {
-
     noteService
       .getAll()
       .then(initialNotes => setPersons(initialNotes))
@@ -106,7 +123,7 @@ const App = () => {
         </div>
       </form>
       <h3>Numbers</h3>
-      <PersonForm persons={persons} nameFilter={nameFilter} />
+      <PersonForm persons={persons} nameFilter={nameFilter} setPersons={setPersons}/>
     </div>
   );
 }
