@@ -37,7 +37,7 @@ const DisplayCountries = ({countries, filter}) => {
   }
 }
 
-const DisplayCountry = ({country, showComponent }) => {
+const DisplayCountry = ({country, showComponent}) => {
   const [state, setState] = useState(showComponent)
 
   const handleButtonClick = () => {

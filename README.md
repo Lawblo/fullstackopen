@@ -27,6 +27,6 @@
 - [1.1 - 1.5, 2.1 - 2.5, CourseInfo](./exercises/courseinfo/src/App.js)
 - [1.6 - 1.11, Unicafe](./exercises/unicafe/src/App.js)
 - [1.12 - 1.14, Anecdotes](./exercises/anecdotes/src/App.js)
-- [2.6 - 2.11, Phonebook](./exercises/phonebook/src/App.js)
+- [2.6 - 2.11, 2.15 - 2.18, Phonebook](./exercises/phonebook/src/App.js)
 - [2.12 - 2.14, Data for Countries](./exercises/countrydata/src/App.js)
 

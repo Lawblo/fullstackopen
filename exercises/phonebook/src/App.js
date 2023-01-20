@@ -48,17 +48,23 @@ const App = () => {
     if (isDuplicate()) {
       alert(`${newName} is already added to the phonebook`)
       setPersons([...persons])
+      setNewName('')
+      setNewNumber('')
+      return 
     }
-    else {
-      const personObject = {
-        name: newName,
-        number: newNumber,
-        id: persons.length + 1
-      }
-      setPersons(persons.concat(personObject))
+
+    const personObject = {
+      name: newName,
+      number: newNumber,
     }
-    setNewName('')
-    setNewNumber('')
+
+    axios
+      .post('http://localhost:3001/persons', personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const handleNameChange = (event) => {
@@ -74,12 +80,9 @@ const App = () => {
   }
 
   const isDuplicate = () => {
-    const duplicateFound = persons.filter(
+    if (persons .filter(
       person => person.name === newName
-    )
-    if (duplicateFound.length > 0) {
-      return true
-    }
+    ).length > 0) return true
     return false
   }
 
