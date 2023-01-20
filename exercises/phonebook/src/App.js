@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import noteService from './services/persons.js'
+import personService from './services/persons.js'
 
 
 const Person = ({person, persons, setPersons}) => {
   const deletePerson = () => {
-    noteService.deletePerson(person.id)
+    personService.deletePerson(person.id)
     setPersons(persons.filter(p => p.id !== person.id))
   } 
 
@@ -54,33 +54,49 @@ const App = () => {
   const [nameFilter, setNewFilter] = useState('')
 
   useEffect(() => {
-    noteService
+    personService
       .getAll()
       .then(initialNotes => setPersons(initialNotes))
   }, [])
 
   const addPerson = (event) => {
+    if (!newName) return
+
     event.preventDefault()
-    if (isDuplicate()) {
-      alert(`${newName} is already added to the phonebook`)
-      setNewName('')
-      setNewNumber('')
-      return 
-    }
 
     const personObject = {
       name: newName,
       number: newNumber,
     }
 
-    noteService
-      .create(personObject)
-      .then( newObject => {
-        setPersons(persons.concat(newObject))
+    if (isDuplicate()) {
+      const [existing] = persons.filter(person => {
+        return person.name === newName
+      })
+
+      if (!window.confirm(`${existing.name} is already added to the phonebook,
+        replace the old number with a new one?`)) {
+
         setNewName('')
         setNewNumber('')
+        return 
       }
-    )
+
+      personService
+        .update(existing.id, personObject)
+        .then(newObject => 
+          setPersons(persons.map(person => person.id !== existing.id ? person : newObject))
+        )
+    }
+    else {
+      personService
+        .create(personObject)
+        .then( newObject => {
+          setPersons(persons.concat(newObject))
+        })
+    }
+    setNewName('')
+    setNewNumber('')
   }
 
   const handleChange = (event, stateSetter) => {
