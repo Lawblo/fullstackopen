@@ -16,8 +16,21 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-const deletePerson = (id) => {
-  axios.delete(`${baseUrl}/${id}`)
+const deletePerson = (id, setNotification, person) => {
+  axios
+    .delete(`${baseUrl}/${id}`)
+    .catch(error => {
+      setNotification({
+        style: 'error',
+        content: `Information of ${person.name} has already been removed from server`
+      })
+      setTimeout(() => {
+        setNotification({
+          style: null,
+          content: null
+        })
+      }, 5000)
+    })
 } 
 
 const personService = { getAll, create, update, deletePerson }

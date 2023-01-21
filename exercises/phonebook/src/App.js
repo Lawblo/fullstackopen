@@ -1,10 +1,18 @@
+import './index.css'
 import { useState, useEffect } from 'react'
 import personService from './services/persons.js'
 
+const Notifications = ({content, style}) => {
+  return (
+    <div className={style}>
+      <p>{content}</p>
+    </div>
+  )
+}
 
-const Person = ({person, persons, setPersons}) => {
+const Person = ({person, persons, setPersons, setNotification}) => {
   const deletePerson = () => {
-    personService.deletePerson(person.id)
+    personService.deletePerson(person.id, setNotification, person) 
     setPersons(persons.filter(p => p.id !== person.id))
   } 
 
@@ -13,7 +21,7 @@ const Person = ({person, persons, setPersons}) => {
   )
 }
 
-const PersonForm = ({persons, setPersons, nameFilter}) => {
+const PersonForm = ({persons, setPersons, nameFilter, setNotification}) => {
   return (
     <>
     {persons
@@ -27,6 +35,7 @@ const PersonForm = ({persons, setPersons, nameFilter}) => {
                 person={person}
                 setPersons={setPersons}
                 persons = {persons}
+                setNotification={setNotification}
               /> 
             )
         })
@@ -52,6 +61,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [nameFilter, setNewFilter] = useState('')
+  const [notification, setNotification] = useState({style: null, content: null})
 
   useEffect(() => {
     personService
@@ -82,6 +92,17 @@ const App = () => {
         return 
       }
 
+      setNotification({
+        style: 'message',
+        content: `Updated number for ${newName}`
+      })
+      setTimeout(() => {
+        setNotification({
+          style: null,
+          content: null
+        })
+      }, 5000)
+
       personService
         .update(existing.id, personObject)
         .then(newObject => 
@@ -94,9 +115,17 @@ const App = () => {
         .then( newObject => {
           setPersons(persons.concat(newObject))
         })
+      setNotification({
+        style: 'message',
+        content: `Added ${newName}`
+      })
+      setTimeout(() => {
+        setNotification({style: null, content: null})
+      }, 5000)
     }
     setNewName('')
     setNewNumber('')
+
   }
 
   const handleChange = (event, stateSetter) => {
@@ -111,10 +140,10 @@ const App = () => {
     return false
   }
 
-
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notifications content={notification.content} style={notification.style}/>
       <form>
         <FormInput
           title={'filter shown with'}
@@ -139,7 +168,12 @@ const App = () => {
         </div>
       </form>
       <h3>Numbers</h3>
-      <PersonForm persons={persons} nameFilter={nameFilter} setPersons={setPersons}/>
+      <PersonForm
+        persons={persons}
+        nameFilter={nameFilter}
+        setPersons={setPersons}
+        setNotification={setNotification}
+      />
     </div>
   );
 }
