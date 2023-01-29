@@ -30,15 +30,29 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
+  '3.1'
   res.send(persons)
 })
 
 app.get('/info', (req, res) => {
+  '3.2'
   html_content = `
   <p>Phonebook has info for ${persons.length} people</p>
   <p>${Date()}</p>
   `
   res.send(html_content)
+})
+
+app.get('/api/persons/:id', (req, res) => {
+  '3.3'
+  const id = Number(req.params.id)
+  person = persons.find(person => person.id === id)
+  if (person) {
+    res.json(person)
+  }
+  else {
+    res.status(404).end()
+  }
 })
 
 const PORT = 3001
