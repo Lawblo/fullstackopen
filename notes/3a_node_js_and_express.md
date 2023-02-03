@@ -38,4 +38,12 @@ These are defined by the HTTP *verb*:
 With this, we define what REST refers to as a uniform interface
 What is considered a REST API differs.
 
+GET must never cause side effects. This means that it should not alter the state
+of the database, and the response should only return data that already exists on
+the server. 
 
+The HEAD request should work like GET, but only return the status code and response
+headers. 
+
+All HTTP requests should be *idempotent*, which means that the side effects of
+1 or more identical requests should be the same as a single request
